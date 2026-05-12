@@ -73,6 +73,7 @@ const rentalDelivery = document.getElementById("rentaEntrega");
 const estimateTitle = document.getElementById("estimateTitle");
 const estimateText = document.getElementById("estimateText");
 const bookingForm = document.getElementById("bookingForm");
+const timeSelect = document.getElementById("hora");
 
 function money(value) {
   return `US$${value}`;
@@ -88,6 +89,27 @@ function setGroupVisible(group, visible) {
 
 function getRentalDays() {
   return Math.max(1, parseInt(rentalDays.value || "1", 10));
+}
+
+function formatTimeOption(hour, minutes) {
+  const period = hour < 12 ? "a. m." : "p. m.";
+  const displayHour = hour % 12 || 12;
+  const displayMinutes = String(minutes).padStart(2, "0");
+
+  return `${displayHour}:${displayMinutes} ${period}`;
+}
+
+function populateTimeOptions() {
+  for (let hour = 0; hour < 24; hour += 1) {
+    [0, 30].forEach(minutes => {
+      const option = document.createElement("option");
+      const time = formatTimeOption(hour, minutes);
+
+      option.value = time;
+      option.textContent = time;
+      timeSelect.appendChild(option);
+    });
+  }
 }
 
 function getRentalPricing(days) {
@@ -180,6 +202,7 @@ serviceButtons.forEach(button => {
 
 const today = new Date().toISOString().split("T")[0];
 document.getElementById("fecha").setAttribute("min", today);
+populateTimeOptions();
 
 bookingForm.addEventListener("submit", event => {
   event.preventDefault();
