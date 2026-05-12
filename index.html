@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Jet White Taxi y Renta Car</title>
+  <meta name="description" content="Reserva traslados al aeropuerto y rent car con Jet White Taxi y Renta Car en República Dominicana. Rent car con tarifa según cantidad de días." />
+  <meta name="theme-color" content="#111827" />
+  <meta property="og:title" content="Jet White Taxi y Renta Car" />
+  <meta property="og:description" content="Traslados al aeropuerto y rent car con reserva directa por WhatsApp." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="logo-jet-white-clean.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-bar">
+      <a href="#inicio" class="brand" aria-label="Jet White Taxi y Renta Car">
+        <span class="brand-mark">
+          <img src="logo-jet-white-clean.png" alt="Logo Jet White Taxi y Renta Car" />
+        </span>
+        <span class="brand-text">
+          <small>Aeropuerto y rent car</small>
+          <strong>Jet White</strong>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#reservar">Reservar</a>
+        <a href="#tarifas">Tarifas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <a class="btn btn-whatsapp header-cta" href="https://wa.me/18094266236?text=Hola,%20quiero%20hacer%20una%20reserva%20con%20Jet%20White" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+        Reservar
+      </a>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero" id="reservar">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="logo-jet-white-clean.png" alt="" />
+      </div>
+
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <span class="hero-kicker">República Dominicana</span>
+          <h1>Reserva fácil por WhatsApp.</h1>
+          <p>Traslados al aeropuerto y rent car con tarifas claras y atención directa.</p>
+
+          <div class="hero-highlights">
+            <div>
+              <strong>US$55 a US$60</strong>
+              <span>Rent car por día</span>
+            </div>
+            <div>
+              <strong>US$95</strong>
+              <span>Aeropuerto desde</span>
+            </div>
+            <div>
+              <strong>Directo</strong>
+              <span>Reserva por WhatsApp</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#bookingForm">
+              <i class="fa-solid fa-calendar-check"></i>
+              Hacer reserva
+            </a>
+            <a class="btn btn-ghost" href="tel:+18094266236">
+              <i class="fa-solid fa-phone"></i>
+              Llamar ahora
+            </a>
+          </div>
+        </div>
+
+        <form class="form-card" id="bookingForm">
+          <div class="form-top">
+            <div>
+              <span class="eyebrow">Reserva rápida</span>
+              <h2>Elige tu servicio</h2>
+            </div>
+            <span class="service-badge" id="formServiceBadge">Aeropuerto</span>
+          </div>
+
+          <div class="service-options" aria-label="Tipos de servicio">
+            <button class="service-option active" type="button" data-service="aeropuerto">
+              <i class="fa-solid fa-plane-departure"></i>
+              <span>
+                <strong>Aeropuerto</strong>
+                <small>Carro o Van XL</small>
+              </span>
+            </button>
+
+            <button class="service-option" type="button" data-service="renta">
+              <i class="fa-solid fa-key"></i>
+              <span>
+                <strong>Rent car</strong>
+                <small>US$55 a US$60/día</small>
+              </span>
+            </button>
+
+          </div>
+
+          <div class="form-grid">
+            <label class="field">
+              <span>Servicio</span>
+              <select id="servicio" required>
+                <option value="aeropuerto">Aeropuerto</option>
+                <option value="renta">Rent car</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Nombre</span>
+              <input type="text" id="nombre" placeholder="Tu nombre" required />
+            </label>
+
+            <label class="field">
+              <span>WhatsApp</span>
+              <input type="tel" id="telefono" placeholder="Tu número" required />
+            </label>
+
+            <label class="field" id="passengerField">
+              <span>Pasajeros</span>
+              <input type="number" id="pasajeros" min="1" value="1" required />
+            </label>
+
+            <label class="field">
+              <span>Fecha</span>
+              <input type="date" id="fecha" required />
+            </label>
+
+            <label class="field">
+              <span>Hora</span>
+              <input type="time" id="hora" required />
+            </label>
+          </div>
+
+          <div class="form-grid service-fields" id="airportFields">
+            <label class="field">
+              <span>Aeropuerto / zona</span>
+              <select id="aeropuertoZona" data-required="true">
+                <option value="">Selecciona una opción</option>
+                <option value="punta-cana">Punta Cana</option>
+                <option value="las-terrenas-samana">Las Terrenas, Samaná</option>
+                <option value="santo-domingo">Santo Domingo</option>
+                <option value="santiago">Santiago</option>
+                <option value="puerto-plata">Puerto Plata</option>
+                <option value="la-romana">La Romana</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Vehículo</span>
+              <select id="aeropuertoVehiculo">
+                <option value="carro">Carro</option>
+                <option value="vanxl">Van XL</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Traslado</span>
+              <select id="aeropuertoSentido">
+                <option value="Hacia el aeropuerto">Hacia el aeropuerto</option>
+                <option value="Desde el aeropuerto">Desde el aeropuerto</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Recogida</span>
+              <input type="text" id="airportPickup" placeholder="Hotel, casa o ubicación" />
+            </label>
+
+            <label class="field full">
+              <span>Destino</span>
+              <input type="text" id="airportDropoff" placeholder="Destino final o punto de llegada" />
+            </label>
+          </div>
+
+          <div class="form-grid service-fields hidden" id="rentalFields">
+            <label class="field">
+              <span>Vehículo</span>
+              <select id="rentaVehiculo">
+                <option value="kia-seltos-2025">Kia Seltos 2025</option>
+                <option value="hyundai-cantus-2023">Hyundai Cantus 2023</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Días</span>
+              <input type="number" id="rentaDias" min="1" value="1" />
+            </label>
+
+            <label class="field full">
+              <span>Lugar de entrega</span>
+              <input type="text" id="rentaEntrega" placeholder="Dónde quieres recibir el vehículo" />
+            </label>
+
+            <div class="rental-note full">
+              <i class="fa-solid fa-id-card"></i>
+              <span>Para rentar se requiere licencia vigente, identificación y confirmación previa.</span>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Nota adicional</span>
+            <textarea id="mensaje" placeholder="Vuelo, maletas, ubicación exacta o cualquier detalle"></textarea>
+          </label>
+
+          <div class="estimate-box" id="estimateBox">
+            <strong id="estimateTitle">Tarifa</strong>
+            <span id="estimateText">Selecciona aeropuerto y tipo de vehículo para ver la tarifa.</span>
+          </div>
+
+          <button class="btn btn-whatsapp submit-btn" type="submit">
+            <i class="fa-brands fa-whatsapp"></i>
+            Enviar reserva por WhatsApp
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="tarifas">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Tarifas</span>
+          <h2>Precios principales</h2>
+          <p>Tarifas de referencia. El precio final puede variar por horario, disponibilidad y detalles del servicio.</p>
+        </div>
+
+        <div class="rate-grid">
+          <article class="rate-summary">
+            <i class="fa-solid fa-plane-departure"></i>
+            <strong>Aeropuerto</strong>
+            <span>Traslados desde US$95 según zona y tipo de vehículo.</span>
+          </article>
+
+          <article class="rate-summary">
+            <i class="fa-solid fa-key"></i>
+            <strong>Rent car</strong>
+            <span>US$60/día si son menos de 3 días. Más de 5 días se confirma por teléfono.</span>
+          </article>
+        </div>
+
+        <div class="rate-card">
+          <div class="rate-card-head">
+            <div>
+              <span class="eyebrow">Aeropuertos</span>
+              <h3>Traslados por zona</h3>
+            </div>
+            <span>Carro / Van XL</span>
+          </div>
+
+          <div class="table-wrap">
+            <table class="rates-table">
+              <thead>
+                <tr>
+                  <th>Aeropuerto / zona</th>
+                  <th>Carro</th>
+                  <th>Van XL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Punta Cana</td>
+                  <td>US$140</td>
+                  <td>US$160</td>
+                </tr>
+                <tr>
+                  <td>Las Terrenas, Samaná</td>
+                  <td>US$175</td>
+                  <td>US$190</td>
+                </tr>
+                <tr>
+                  <td>Santo Domingo</td>
+                  <td>US$35</td>
+                  <td>US$45</td>
+                </tr>
+                <tr>
+                  <td>Santiago</td>
+                  <td>US$140</td>
+                  <td>US$160</td>
+                </tr>
+                <tr>
+                  <td>Puerto Plata</td>
+                  <td>US$175</td>
+                  <td>US$190</td>
+                </tr>
+                <tr>
+                  <td>La Romana</td>
+                  <td>US$80</td>
+                  <td>US$100</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contacto">
+      <div class="container contact-grid">
+        <article class="contact-card">
+          <span class="eyebrow">Contacto</span>
+          <h2>Reservas directas</h2>
+          <p><strong>Teléfono:</strong> <a href="tel:+18094266236">+1 (809) 426-6236</a></p>
+          <p><strong>WhatsApp:</strong> <a href="https://wa.me/18094266236" target="_blank">+1 (809) 426-6236</a></p>
+          <p><strong>Correo:</strong> <a href="mailto:giusseppecuello@gmail.com">giusseppecuello@gmail.com</a></p>
+        </article>
+
+        <article class="contact-card payment-card">
+          <span class="eyebrow">Pago</span>
+          <h2>Cuenta bancaria</h2>
+          <p><strong>Banco:</strong> Popular</p>
+          <p><strong>Tipo:</strong> Cuenta de ahorro</p>
+          <p><strong>Número:</strong> 846927481</p>
+          <p class="muted">Confirma el pago por WhatsApp para validar la reserva.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span>© 2026 Jet White Taxi y Renta Car.</span>
+      <span>Traslados al aeropuerto y rent car en República Dominicana.</span>
+    </div>
+  </footer>
+
+  <div class="floating-actions" aria-label="Acciones rápidas">
+    <a class="float-btn call" href="tel:+18094266236" aria-label="Llamar">
+      <i class="fa-solid fa-phone"></i>
+    </a>
+    <a class="float-btn whatsapp" href="https://wa.me/18094266236?text=Hola,%20quiero%20hacer%20una%20reserva%20con%20Jet%20White" target="_blank" aria-label="WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
