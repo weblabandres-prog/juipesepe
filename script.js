@@ -124,7 +124,7 @@ function getRentalPricing(days) {
   if (days > 5) {
     return {
       type: "phone",
-      text: "Más de 5 días: tarifa entre US$55 y US$60/día. Se confirma por teléfono o WhatsApp."
+      text: "Más de 5 días: tarifa entre US$50 y US$60/día. Se confirma por teléfono o WhatsApp."
     };
   }
 
