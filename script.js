@@ -92,11 +92,10 @@ function getRentalDays() {
 }
 
 function formatTimeOption(hour, minutes) {
-  const period = hour < 12 ? "a. m." : "p. m.";
-  const displayHour = hour % 12 || 12;
+  const displayHour = String(hour).padStart(2, "0");
   const displayMinutes = String(minutes).padStart(2, "0");
 
-  return `${displayHour}:${displayMinutes} ${period}`;
+  return `${displayHour}:${displayMinutes}`;
 }
 
 function populateTimeOptions() {
