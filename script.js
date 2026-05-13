@@ -97,6 +97,7 @@ const estimateTitle = document.getElementById("estimateTitle");
 const estimateText = document.getElementById("estimateText");
 const bookingForm = document.getElementById("bookingForm");
 const timeSelect = document.getElementById("hora");
+const paymentMethod = document.getElementById("metodoPago");
 
 function money(value) {
   return `US$${value}`;
@@ -266,7 +267,8 @@ bookingForm.addEventListener("submit", event => {
     `Nombre: ${nombre}`,
     `WhatsApp: ${telefono}`,
     `Fecha: ${fecha}`,
-    `Hora: ${hora}`
+    `Hora: ${hora}`,
+    `Método de pago: ${paymentMethod.value}`
   ];
 
   if (service !== "renta") {
