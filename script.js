@@ -25,7 +25,10 @@ const RENTAL_RATES = {
     label: "Hyundai Tucson 2021"
   },
   "maserati-2021": {
-    label: "Maserati 2021"
+    label: "Maserati Ghibli 2021"
+  },
+  "kia-sonet-2024": {
+    label: "Kia Sonet 2024"
   },
   "kia-sonet-2025": {
     label: "Kia Sonet 2025"
@@ -216,6 +219,15 @@ function updateEstimate() {
 serviceButtons.forEach(button => {
   button.addEventListener("click", () => {
     serviceSelect.value = button.dataset.service;
+    updateServiceUI();
+    bookingForm.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+document.querySelectorAll(".catalog-reserve").forEach(button => {
+  button.addEventListener("click", () => {
+    serviceSelect.value = "renta";
+    rentalVehicle.value = button.dataset.rental;
     updateServiceUI();
     bookingForm.scrollIntoView({ behavior: "smooth", block: "start" });
   });

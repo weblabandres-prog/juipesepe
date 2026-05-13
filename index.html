@@ -35,6 +35,7 @@
 
       <nav class="nav-links" aria-label="Navegación principal">
         <a href="#reservar">Reservar</a>
+        <a href="#catalogo">Catálogo</a>
         <a href="#tarifas">Tarifas</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -207,7 +208,8 @@
                 <option value="honda-crv-2025">Honda CR-V 2025</option>
                 <option value="kia-sorento">Kia Sorento</option>
                 <option value="hyundai-tucson-2021">Hyundai Tucson 2021</option>
-                <option value="maserati-2021">Maserati 2021</option>
+                <option value="maserati-2021">Maserati Ghibli 2021</option>
+                <option value="kia-sonet-2024">Kia Sonet 2024</option>
                 <option value="kia-sonet-2025">Kia Sonet 2025</option>
               </select>
             </label>
@@ -243,6 +245,93 @@
             Enviar reserva por WhatsApp
           </button>
         </form>
+      </div>
+    </section>
+
+    <section class="section catalog-section" id="catalogo">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Rent car</span>
+          <h2>Catálogo de vehículos</h2>
+          <p>Opciones disponibles para renta. La disponibilidad se confirma directo por WhatsApp.</p>
+        </div>
+
+        <div class="catalog-grid">
+          <article class="catalog-card">
+            <div class="catalog-media">
+              <img src="catalogo/kia-sonet-2025.jpg" alt="Kia Sonet 2025" loading="lazy" onerror="this.parentElement.classList.add('image-missing'); this.remove();" />
+              <span>Kia Sonet 2025</span>
+            </div>
+            <div class="catalog-body">
+              <h3>Kia Sonet 2025</h3>
+              <p>Compacta, cómoda y práctica para moverse fácil.</p>
+              <button class="btn btn-primary catalog-reserve" type="button" data-rental="kia-sonet-2025">
+                <i class="fa-solid fa-calendar-check"></i>
+                Reservar
+              </button>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <div class="catalog-media">
+              <img src="catalogo/kia-seltos-2025.jpg" alt="Kia Seltos 2025" loading="lazy" onerror="this.parentElement.classList.add('image-missing'); this.remove();" />
+              <span>Kia Seltos 2025</span>
+            </div>
+            <div class="catalog-body">
+              <h3>Kia Seltos 2025</h3>
+              <p>SUV moderna para viajes cómodos y uso diario.</p>
+              <button class="btn btn-primary catalog-reserve" type="button" data-rental="kia-seltos-2025">
+                <i class="fa-solid fa-calendar-check"></i>
+                Reservar
+              </button>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <div class="catalog-media">
+              <img src="catalogo/hyundai-tucson-2021.jpg" alt="Hyundai Tucson 2021" loading="lazy" onerror="this.parentElement.classList.add('image-missing'); this.remove();" />
+              <span>Hyundai Tucson 2021</span>
+            </div>
+            <div class="catalog-body">
+              <h3>Hyundai Tucson 2021</h3>
+              <p>SUV amplia para familia, equipaje y rutas largas.</p>
+              <button class="btn btn-primary catalog-reserve" type="button" data-rental="hyundai-tucson-2021">
+                <i class="fa-solid fa-calendar-check"></i>
+                Reservar
+              </button>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <div class="catalog-media">
+              <img src="catalogo/maserati-ghibli-2021.jpg" alt="Maserati Ghibli 2021" loading="lazy" onerror="this.parentElement.classList.add('image-missing'); this.remove();" />
+              <span>Maserati Ghibli 2021</span>
+            </div>
+            <div class="catalog-body">
+              <h3>Maserati Ghibli 2021</h3>
+              <p>Opción premium para una experiencia más exclusiva.</p>
+              <button class="btn btn-primary catalog-reserve" type="button" data-rental="maserati-2021">
+                <i class="fa-solid fa-calendar-check"></i>
+                Reservar
+              </button>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <div class="catalog-media">
+              <img src="catalogo/kia-sonet-2024.jpg" alt="Kia Sonet 2024" loading="lazy" onerror="this.parentElement.classList.add('image-missing'); this.remove();" />
+              <span>Kia Sonet 2024</span>
+            </div>
+            <div class="catalog-body">
+              <h3>Kia Sonet 2024</h3>
+              <p>Compacta y eficiente para reservas por día.</p>
+              <button class="btn btn-primary catalog-reserve" type="button" data-rental="kia-sonet-2024">
+                <i class="fa-solid fa-calendar-check"></i>
+                Reservar
+              </button>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
