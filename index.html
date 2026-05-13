@@ -99,7 +99,7 @@
               <i class="fa-solid fa-plane-departure"></i>
               <span>
                 <strong>Aeropuerto</strong>
-                <small>Carro o Van XL</small>
+                <small>Carro, Van XL o XXL</small>
               </span>
             </button>
 
@@ -169,6 +169,7 @@
               <select id="aeropuertoVehiculo">
                 <option value="carro">Carro</option>
                 <option value="vanxl">Van XL</option>
+                <option value="xxl">XXL (+8 personas)</option>
               </select>
             </label>
 
@@ -185,6 +186,11 @@
               <input type="text" id="airportPickup" placeholder="Hotel, casa o ubicación" />
             </label>
 
+            <label class="field">
+              <span>Número de vuelo</span>
+              <input type="text" id="flightNumber" placeholder="Ej: AA1234" />
+            </label>
+
             <label class="field full">
               <span>Destino</span>
               <input type="text" id="airportDropoff" placeholder="Destino final o punto de llegada" />
@@ -197,6 +203,12 @@
               <select id="rentaVehiculo">
                 <option value="kia-seltos-2025">Kia Seltos 2025</option>
                 <option value="hyundai-cantus-2023">Hyundai Cantus 2023</option>
+                <option value="honda-crv-2024">Honda CR-V 2024</option>
+                <option value="honda-crv-2025">Honda CR-V 2025</option>
+                <option value="kia-sorento">Kia Sorento</option>
+                <option value="hyundai-tucson-2021">Hyundai Tucson 2021</option>
+                <option value="maserati-2021">Maserati 2021</option>
+                <option value="kia-sonet-2025">Kia Sonet 2025</option>
               </select>
             </label>
 
@@ -252,7 +264,7 @@
           <article class="rate-summary">
             <i class="fa-solid fa-key"></i>
             <strong>Rent car</strong>
-            <span>US$60/día si son menos de 3 días. Más de 5 días se confirma por teléfono.</span>
+            <span>US$50 a US$60 por día. Menos de 3 días: US$60/día.</span>
           </article>
         </div>
 
@@ -262,7 +274,7 @@
               <span class="eyebrow">Aeropuertos</span>
               <h3>Traslados por zona</h3>
             </div>
-            <span>Carro / Van XL</span>
+            <span>Carro / Van XL / XXL</span>
           </div>
 
           <div class="table-wrap">
@@ -272,6 +284,7 @@
                   <th>Aeropuerto / zona</th>
                   <th>Carro</th>
                   <th>Van XL</th>
+                  <th>XXL (+8)</th>
                 </tr>
               </thead>
               <tbody>
@@ -279,31 +292,37 @@
                   <td>Punta Cana</td>
                   <td>US$140</td>
                   <td>US$160</td>
+                  <td>Cotizar</td>
                 </tr>
                 <tr>
                   <td>Las Terrenas, Samaná</td>
                   <td>US$175</td>
                   <td>US$190</td>
+                  <td>Cotizar</td>
                 </tr>
                 <tr>
                   <td>Santo Domingo</td>
                   <td>US$35</td>
                   <td>US$45</td>
+                  <td>Cotizar</td>
                 </tr>
                 <tr>
                   <td>Santiago</td>
                   <td>US$140</td>
                   <td>US$160</td>
+                  <td>Cotizar</td>
                 </tr>
                 <tr>
                   <td>Puerto Plata</td>
                   <td>US$175</td>
                   <td>US$190</td>
+                  <td>Cotizar</td>
                 </tr>
                 <tr>
                   <td>La Romana</td>
                   <td>US$80</td>
                   <td>US$100</td>
+                  <td>Cotizar</td>
                 </tr>
               </tbody>
             </table>

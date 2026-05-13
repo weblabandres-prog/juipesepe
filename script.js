@@ -11,6 +11,24 @@ const RENTAL_RATES = {
   },
   "hyundai-cantus-2023": {
     label: "Hyundai Cantus 2023"
+  },
+  "honda-crv-2024": {
+    label: "Honda CR-V 2024"
+  },
+  "honda-crv-2025": {
+    label: "Honda CR-V 2025"
+  },
+  "kia-sorento": {
+    label: "Kia Sorento"
+  },
+  "hyundai-tucson-2021": {
+    label: "Hyundai Tucson 2021"
+  },
+  "maserati-2021": {
+    label: "Maserati 2021"
+  },
+  "kia-sonet-2025": {
+    label: "Kia Sonet 2025"
   }
 };
 
@@ -49,7 +67,8 @@ const AIRPORT_RATES = {
 
 const AIRPORT_VEHICLE_LABELS = {
   carro: "Carro",
-  vanxl: "Van XL"
+  vanxl: "Van XL",
+  xxl: "XXL (+8 personas)"
 };
 
 const serviceSelect = document.getElementById("servicio");
@@ -64,6 +83,7 @@ const airportZone = document.getElementById("aeropuertoZona");
 const airportVehicle = document.getElementById("aeropuertoVehiculo");
 const airportDirection = document.getElementById("aeropuertoSentido");
 const airportPickup = document.getElementById("airportPickup");
+const flightNumber = document.getElementById("flightNumber");
 const airportDropoff = document.getElementById("airportDropoff");
 
 const rentalVehicle = document.getElementById("rentaVehiculo");
@@ -134,6 +154,18 @@ function getRentalPricing(days) {
   };
 }
 
+function getAirportRateText(selectedAirport, vehicleType) {
+  if (!selectedAirport) {
+    return "Pendiente";
+  }
+
+  if (vehicleType === "xxl" || selectedAirport[vehicleType] == null) {
+    return "Se confirma por teléfono/WhatsApp";
+  }
+
+  return money(selectedAirport[vehicleType]);
+}
+
 function updateServiceUI() {
   const service = serviceSelect.value;
 
@@ -158,10 +190,11 @@ function updateEstimate() {
     const selectedAirport = AIRPORT_RATES[airportZone.value];
     const vehicleType = airportVehicle.value || "carro";
     const vehicleLabel = AIRPORT_VEHICLE_LABELS[vehicleType];
+    const rateText = getAirportRateText(selectedAirport, vehicleType);
 
     estimateTitle.textContent = "Traslado al aeropuerto";
     estimateText.textContent = selectedAirport
-      ? `${selectedAirport.label} en ${vehicleLabel}: ${money(selectedAirport[vehicleType])}.`
+      ? `${selectedAirport.label} en ${vehicleLabel}: ${rateText}.`
       : "Selecciona aeropuerto y tipo de vehículo para ver la tarifa.";
     return;
   }
@@ -232,11 +265,13 @@ bookingForm.addEventListener("submit", event => {
     const selectedAirport = AIRPORT_RATES[airportZone.value];
     const vehicleType = airportVehicle.value || "carro";
     const vehicleLabel = AIRPORT_VEHICLE_LABELS[vehicleType];
+    const rateText = getAirportRateText(selectedAirport, vehicleType);
 
     lines.push(`Aeropuerto/zona: ${selectedAirport ? selectedAirport.label : "No especificado"}`);
     lines.push(`Vehículo: ${vehicleLabel}`);
     lines.push(`Tipo de traslado: ${airportDirection.value}`);
-    lines.push(`Tarifa: ${selectedAirport ? money(selectedAirport[vehicleType]) : "Pendiente"}`);
+    lines.push(`Tarifa: ${rateText}`);
+    lines.push(`Número de vuelo: ${flightNumber.value.trim() || "No especificado"}`);
     lines.push(`Recogida: ${airportPickup.value.trim() || "No especificada"}`);
     lines.push(`Destino: ${airportDropoff.value.trim() || "No especificado"}`);
   }
