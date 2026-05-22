@@ -1,39 +1,49 @@
 const PHONE_NUMBER = "18094266236";
 
+/* =========================================
+   LABELS
+========================================= */
+
 const SERVICE_LABELS = {
   aeropuerto: "Aeropuerto",
-  renta: "Rent car"
+  renta: "Rent a Car"
 };
+
+const AIRPORT_VEHICLE_LABELS = {
+  carro: "Carro",
+  vanxl: "Van XL",
+  xxl: "Van XXL (8+ pasajeros)"
+};
+
+/* =========================================
+   RENTAL VEHICLES
+========================================= */
 
 const RENTAL_RATES = {
   "kia-seltos-2025": {
     label: "Kia Seltos 2025"
   },
-  "hyundai-cantus-2023": {
-    label: "Hyundai Cantus 2023"
+
+  "hyundai-creta-2023": {
+    label: "Hyundai Creta 2023"
   },
-  "honda-crv-2024": {
-    label: "Honda CR-V 2024"
-  },
+
   "honda-crv-2025": {
     label: "Honda CR-V 2025"
   },
+
   "kia-sorento": {
     label: "Kia Sorento"
   },
-  "hyundai-tucson-2021": {
-    label: "Hyundai Tucson 2021"
-  },
+
   "maserati-2021": {
     label: "Maserati Ghibli 2021"
-  },
-  "kia-sonet-2024": {
-    label: "Kia Sonet 2024"
-  },
-  "kia-sonet-2025": {
-    label: "Kia Sonet 2025"
   }
 };
+
+/* =========================================
+   AIRPORT RATES
+========================================= */
 
 const AIRPORT_RATES = {
   "punta-cana": {
@@ -41,26 +51,31 @@ const AIRPORT_RATES = {
     carro: 140,
     vanxl: 160
   },
+
   "las-terrenas-samana": {
     label: "Las Terrenas, Samaná",
     carro: 175,
     vanxl: 190
   },
+
   "santo-domingo": {
     label: "Santo Domingo",
     carro: 35,
     vanxl: 45
   },
+
   santiago: {
     label: "Santiago",
     carro: 140,
     vanxl: 160
   },
+
   "puerto-plata": {
     label: "Puerto Plata",
     carro: 175,
     vanxl: 190
   },
+
   "la-romana": {
     label: "La Romana",
     carro: 80,
@@ -68,171 +83,362 @@ const AIRPORT_RATES = {
   }
 };
 
-const AIRPORT_VEHICLE_LABELS = {
-  carro: "Carro",
-  vanxl: "Van XL",
-  xxl: "XXL (+8 personas)"
-};
+/* =========================================
+   ELEMENTS
+========================================= */
 
-const serviceSelect = document.getElementById("servicio");
-const serviceButtons = document.querySelectorAll(".service-option");
-const formServiceBadge = document.getElementById("formServiceBadge");
-const passengerField = document.getElementById("passengerField");
+const serviceSelect =
+  document.getElementById("servicio");
 
-const airportFields = document.getElementById("airportFields");
-const rentalFields = document.getElementById("rentalFields");
+const serviceButtons =
+  document.querySelectorAll(".service-option");
 
-const airportZone = document.getElementById("aeropuertoZona");
-const airportVehicle = document.getElementById("aeropuertoVehiculo");
-const airportDirection = document.getElementById("aeropuertoSentido");
-const airportPickup = document.getElementById("airportPickup");
-const flightNumber = document.getElementById("flightNumber");
-const airportDropoff = document.getElementById("airportDropoff");
+const formServiceBadge =
+  document.getElementById("formServiceBadge");
 
-const rentalVehicle = document.getElementById("rentaVehiculo");
-const rentalDays = document.getElementById("rentaDias");
-const rentalDelivery = document.getElementById("rentaEntrega");
+const passengerField =
+  document.getElementById("passengerField");
 
-const estimateTitle = document.getElementById("estimateTitle");
-const estimateText = document.getElementById("estimateText");
-const bookingForm = document.getElementById("bookingForm");
-const timeSelect = document.getElementById("hora");
-const paymentMethod = document.getElementById("metodoPago");
+const airportFields =
+  document.getElementById("airportFields");
+
+const rentalFields =
+  document.getElementById("rentalFields");
+
+const airportZone =
+  document.getElementById("aeropuertoZona");
+
+const airportVehicle =
+  document.getElementById("aeropuertoVehiculo");
+
+const airportDirection =
+  document.getElementById("aeropuertoSentido");
+
+const airportPickup =
+  document.getElementById("airportPickup");
+
+const flightNumber =
+  document.getElementById("flightNumber");
+
+const airportDropoff =
+  document.getElementById("airportDropoff");
+
+const rentalVehicle =
+  document.getElementById("rentaVehiculo");
+
+const rentalDays =
+  document.getElementById("rentaDias");
+
+const rentalDelivery =
+  document.getElementById("rentaEntrega");
+
+const estimateTitle =
+  document.getElementById("estimateTitle");
+
+const estimateText =
+  document.getElementById("estimateText");
+
+const bookingForm =
+  document.getElementById("bookingForm");
+
+const timeSelect =
+  document.getElementById("hora");
+
+const paymentMethod =
+  document.getElementById("metodoPago");
+
+/* =========================================
+   HELPERS
+========================================= */
 
 function money(value) {
   return `US$${value}`;
 }
 
-function setGroupVisible(group, visible) {
-  group.classList.toggle("hidden", !visible);
+function smoothToForm() {
 
-  group.querySelectorAll("[data-required='true']").forEach(field => {
-    field.required = visible;
+  bookingForm.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
   });
 }
 
 function getRentalDays() {
-  return Math.max(1, parseInt(rentalDays.value || "1", 10));
+
+  return Math.max(
+    1,
+    parseInt(rentalDays.value || "1", 10)
+  );
 }
 
-function formatTimeOption(hour, minutes) {
-  const displayHour = String(hour).padStart(2, "0");
-  const displayMinutes = String(minutes).padStart(2, "0");
+function setGroupVisible(group, visible) {
 
-  return `${displayHour}:${displayMinutes}`;
+  if (!group) return;
+
+  group.classList.toggle(
+    "hidden",
+    !visible
+  );
+}
+
+/* =========================================
+   TIME FORMAT
+========================================= */
+
+function formatTime(hour, minutes) {
+
+  const hourStr =
+    String(hour).padStart(2, "0");
+
+  const minuteStr =
+    String(minutes).padStart(2, "0");
+
+  return `${hourStr}:${minuteStr}`;
 }
 
 function populateTimeOptions() {
-  for (let hour = 0; hour < 24; hour += 1) {
-    [0, 30].forEach(minutes => {
-      const option = document.createElement("option");
-      const time = formatTimeOption(hour, minutes);
 
-      option.value = time;
-      option.textContent = time;
+  if (!timeSelect) return;
+
+  timeSelect.innerHTML =
+    '<option value="">Selecciona una hora</option>';
+
+  for (let hour = 0; hour < 24; hour++) {
+
+    [0, 30].forEach(minutes => {
+
+      const option =
+        document.createElement("option");
+
+      const formattedTime =
+        formatTime(hour, minutes);
+
+      option.value =
+        formattedTime;
+
+      option.textContent =
+        formattedTime;
+
       timeSelect.appendChild(option);
     });
   }
 }
 
+/* =========================================
+   RENTAL PRICE
+========================================= */
+
 function getRentalPricing(days) {
-  if (days < 3) {
+
+  if (days <= 2) {
+
     return {
       type: "fixed",
-      rate: 60,
       total: days * 60,
-      text: `${days} día(s): tarifa US$60/día. Total: ${money(days * 60)}.`
+      text:
+        `US$60/día — Total: ${money(days * 60)}`
     };
   }
 
   if (days > 5) {
+
     return {
-      type: "phone",
-      text: "Más de 5 días: tarifa entre US$50 y US$60/día. Se confirma por teléfono o WhatsApp."
+      type: "custom",
+      text:
+        "Más de 5 días: tarifa personalizada vía WhatsApp."
     };
   }
 
   return {
-    type: "phone",
-    text: "Para 3 a 5 días, la tarifa se confirma por teléfono o WhatsApp."
+    type: "custom",
+    text:
+      "Tarifa confirmada vía WhatsApp."
   };
 }
 
-function getAirportRateText(selectedAirport, vehicleType) {
+/* =========================================
+   AIRPORT PRICE
+========================================= */
+
+function getAirportRateText(
+  selectedAirport,
+  vehicleType
+) {
+
   if (!selectedAirport) {
     return "Pendiente";
   }
 
-  if (vehicleType === "xxl" || selectedAirport[vehicleType] == null) {
-    return "Se confirma por teléfono/WhatsApp";
+  if (
+    vehicleType === "xxl" ||
+    selectedAirport[vehicleType] == null
+  ) {
+
+    return "Cotizar por WhatsApp";
   }
 
-  return money(selectedAirport[vehicleType]);
+  return money(
+    selectedAirport[vehicleType]
+  );
 }
 
+/* =========================================
+   UPDATE UI
+========================================= */
+
 function updateServiceUI() {
-  const service = serviceSelect.value;
+
+  const service =
+    serviceSelect.value;
 
   serviceButtons.forEach(button => {
-    button.classList.toggle("active", button.dataset.service === service);
+
+    button.classList.toggle(
+      "active",
+      button.dataset.service === service
+    );
   });
 
-  formServiceBadge.textContent = SERVICE_LABELS[service];
-  passengerField.classList.toggle("hidden", service === "renta");
-  document.getElementById("pasajeros").required = service !== "renta";
+  if (formServiceBadge) {
 
-  setGroupVisible(airportFields, service === "aeropuerto");
-  setGroupVisible(rentalFields, service === "renta");
+    formServiceBadge.textContent =
+      SERVICE_LABELS[service];
+  }
+
+  if (passengerField) {
+
+    passengerField.classList.toggle(
+      "hidden",
+      service === "renta"
+    );
+  }
+
+  setGroupVisible(
+    airportFields,
+    service === "aeropuerto"
+  );
+
+  setGroupVisible(
+    rentalFields,
+    service === "renta"
+  );
 
   updateEstimate();
 }
 
+/* =========================================
+   ESTIMATE
+========================================= */
+
 function updateEstimate() {
-  const service = serviceSelect.value;
+
+  const service =
+    serviceSelect.value;
+
+  if (
+    !estimateTitle ||
+    !estimateText
+  ) return;
+
+  /* AIRPORT */
 
   if (service === "aeropuerto") {
-    const selectedAirport = AIRPORT_RATES[airportZone.value];
-    const vehicleType = airportVehicle.value || "carro";
-    const vehicleLabel = AIRPORT_VEHICLE_LABELS[vehicleType];
-    const rateText = getAirportRateText(selectedAirport, vehicleType);
 
-    estimateTitle.textContent = "Traslado al aeropuerto";
-    estimateText.textContent = selectedAirport
-      ? `${selectedAirport.label} en ${vehicleLabel}: ${rateText}.`
-      : "Selecciona aeropuerto y tipo de vehículo para ver la tarifa.";
+    const selectedAirport =
+      AIRPORT_RATES[airportZone.value];
+
+    const vehicleType =
+      airportVehicle.value || "carro";
+
+    const vehicleLabel =
+      AIRPORT_VEHICLE_LABELS[vehicleType];
+
+    const rateText =
+      getAirportRateText(
+        selectedAirport,
+        vehicleType
+      );
+
+    estimateTitle.textContent =
+      "Traslado al aeropuerto";
+
+    estimateText.textContent =
+      selectedAirport
+        ? `${selectedAirport.label} en ${vehicleLabel}: ${rateText}`
+        : "Selecciona destino y vehículo.";
+
     return;
   }
+
+  /* RENT CAR */
 
   if (service === "renta") {
-    const selectedVehicle = RENTAL_RATES[rentalVehicle.value] || RENTAL_RATES["kia-seltos-2025"];
-    const days = getRentalDays();
-    const pricing = getRentalPricing(days);
 
-    estimateTitle.textContent = "Rent car";
-    estimateText.textContent = `${selectedVehicle.label}. ${pricing.text}`;
-    return;
+    const selectedVehicle =
+      RENTAL_RATES[rentalVehicle.value];
+
+    const days =
+      getRentalDays();
+
+    const pricing =
+      getRentalPricing(days);
+
+    estimateTitle.textContent =
+      "Rent a Car";
+
+    estimateText.textContent =
+      `${selectedVehicle.label}. ${pricing.text}`;
   }
-
-  estimateTitle.textContent = "Selecciona un servicio";
-  estimateText.textContent = "Elige aeropuerto o rent car para ver la tarifa.";
 }
 
+/* =========================================
+   BUTTON EVENTS
+========================================= */
+
 serviceButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    serviceSelect.value = button.dataset.service;
-    updateServiceUI();
-    bookingForm.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+
+  button.addEventListener(
+    "click",
+    () => {
+
+      serviceSelect.value =
+        button.dataset.service;
+
+      updateServiceUI();
+
+      smoothToForm();
+    }
+  );
 });
 
-document.querySelectorAll(".catalog-reserve").forEach(button => {
-  button.addEventListener("click", () => {
-    serviceSelect.value = "renta";
-    rentalVehicle.value = button.dataset.rental;
-    updateServiceUI();
-    bookingForm.scrollIntoView({ behavior: "smooth", block: "start" });
+/* =========================================
+   CATALOG EVENTS
+========================================= */
+
+document
+  .querySelectorAll(".catalog-reserve")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        serviceSelect.value =
+          "renta";
+
+        rentalVehicle.value =
+          button.dataset.rental;
+
+        updateServiceUI();
+
+        smoothToForm();
+      }
+    );
   });
-});
+
+/* =========================================
+   LIVE EVENTS
+========================================= */
 
 [
   serviceSelect,
@@ -241,77 +447,232 @@ document.querySelectorAll(".catalog-reserve").forEach(button => {
   rentalVehicle,
   rentalDays
 ].forEach(field => {
-  field.addEventListener("change", updateServiceUI);
-  field.addEventListener("input", updateServiceUI);
+
+  if (!field) return;
+
+  field.addEventListener(
+    "change",
+    updateServiceUI
+  );
+
+  field.addEventListener(
+    "input",
+    updateServiceUI
+  );
 });
 
-const today = new Date().toISOString().split("T")[0];
-document.getElementById("fecha").setAttribute("min", today);
+/* =========================================
+   DATE MIN
+========================================= */
+
+const today =
+  new Date()
+    .toISOString()
+    .split("T")[0];
+
+document
+  .getElementById("fecha")
+  .setAttribute("min", today);
+
+/* =========================================
+   INIT TIMES
+========================================= */
+
 populateTimeOptions();
 
-bookingForm.addEventListener("submit", event => {
-  event.preventDefault();
+/* =========================================
+   FORM SUBMIT
+========================================= */
 
-  const service = serviceSelect.value;
-  const nombre = document.getElementById("nombre").value.trim();
-  const telefono = document.getElementById("telefono").value.trim();
-  const pasajeros = document.getElementById("pasajeros").value.trim();
-  const fecha = document.getElementById("fecha").value.trim();
-  const hora = document.getElementById("hora").value.trim();
-  const mensaje = document.getElementById("mensaje").value.trim();
+bookingForm.addEventListener(
+  "submit",
+  event => {
 
-  const lines = [
-    "Hola, quiero hacer una reserva con Jet White.",
-    "",
-    `Servicio: ${SERVICE_LABELS[service]}`,
-    `Nombre: ${nombre}`,
-    `WhatsApp: ${telefono}`,
-    `Fecha: ${fecha}`,
-    `Hora: ${hora}`,
-    `Método de pago: ${paymentMethod.value}`
-  ];
+    event.preventDefault();
 
-  if (service !== "renta") {
-    lines.splice(5, 0, `Pasajeros: ${pasajeros || "1"}`);
-  }
+    const service =
+      serviceSelect.value;
 
-  if (service === "aeropuerto") {
-    const selectedAirport = AIRPORT_RATES[airportZone.value];
-    const vehicleType = airportVehicle.value || "carro";
-    const vehicleLabel = AIRPORT_VEHICLE_LABELS[vehicleType];
-    const rateText = getAirportRateText(selectedAirport, vehicleType);
+    const nombre =
+      document
+        .getElementById("nombre")
+        .value
+        .trim();
 
-    lines.push(`Aeropuerto/zona: ${selectedAirport ? selectedAirport.label : "No especificado"}`);
-    lines.push(`Vehículo: ${vehicleLabel}`);
-    lines.push(`Tipo de traslado: ${airportDirection.value}`);
-    lines.push(`Tarifa: ${rateText}`);
-    lines.push(`Número de vuelo: ${flightNumber.value.trim() || "No especificado"}`);
-    lines.push(`Recogida: ${airportPickup.value.trim() || "No especificada"}`);
-    lines.push(`Destino: ${airportDropoff.value.trim() || "No especificado"}`);
-  }
+    const telefono =
+      document
+        .getElementById("telefono")
+        .value
+        .trim();
 
-  if (service === "renta") {
-    const selectedVehicle = RENTAL_RATES[rentalVehicle.value] || RENTAL_RATES["kia-seltos-2025"];
-    const days = getRentalDays();
-    const pricing = getRentalPricing(days);
+    const pasajeros =
+      document
+        .getElementById("pasajeros")
+        .value
+        .trim();
 
-    lines.push(`Vehículo: ${selectedVehicle.label}`);
-    lines.push(`Días: ${days}`);
-    lines.push(`Entrega: ${rentalDelivery.value.trim() || "No especificada"}`);
+    const fecha =
+      document
+        .getElementById("fecha")
+        .value
+        .trim();
 
-    if (pricing.type === "fixed") {
-      lines.push("Tarifa: US$60/día");
-      lines.push(`Total: ${money(pricing.total)}`);
-    } else {
-      lines.push("Tarifa: Se confirma por teléfono/WhatsApp");
-      lines.push(`Nota de tarifa: ${pricing.text}`);
+    const hora =
+      document
+        .getElementById("hora")
+        .value
+        .trim();
+
+    const mensaje =
+      document
+        .getElementById("mensaje")
+        .value
+        .trim();
+
+    const lines = [
+
+      "Hola, quiero hacer una reserva con Jet White.",
+
+      "",
+
+      `Servicio: ${SERVICE_LABELS[service]}`,
+
+      `Nombre: ${nombre}`,
+
+      `WhatsApp: ${telefono}`,
+
+      `Fecha: ${fecha}`,
+
+      `Hora: ${hora}`,
+
+      `Método de pago: ${paymentMethod.value}`
+    ];
+
+    /* AIRPORT */
+
+    if (service === "aeropuerto") {
+
+      const selectedAirport =
+        AIRPORT_RATES[airportZone.value];
+
+      const vehicleType =
+        airportVehicle.value;
+
+      const vehicleLabel =
+        AIRPORT_VEHICLE_LABELS[vehicleType];
+
+      const rateText =
+        getAirportRateText(
+          selectedAirport,
+          vehicleType
+        );
+
+      lines.push(
+        `Pasajeros: ${pasajeros || "1"}`
+      );
+
+      lines.push(
+        `Destino: ${selectedAirport?.label || "No especificado"}`
+      );
+
+      lines.push(
+        `Vehículo: ${vehicleLabel}`
+      );
+
+      lines.push(
+        `Traslado: ${airportDirection.value}`
+      );
+
+      lines.push(
+        `Tarifa: ${rateText}`
+      );
+
+      lines.push(
+        `Vuelo: ${
+          flightNumber.value.trim()
+          || "No especificado"
+        }`
+      );
+
+      lines.push(
+        `Recogida: ${
+          airportPickup.value.trim()
+          || "No especificada"
+        }`
+      );
+
+      lines.push(
+        `Destino exacto: ${
+          airportDropoff.value.trim()
+          || "No especificado"
+        }`
+      );
     }
+
+    /* RENT CAR */
+
+    if (service === "renta") {
+
+      const selectedVehicle =
+        RENTAL_RATES[
+          rentalVehicle.value
+        ];
+
+      const days =
+        getRentalDays();
+
+      const pricing =
+        getRentalPricing(days);
+
+      lines.push(
+        `Vehículo: ${selectedVehicle.label}`
+      );
+
+      lines.push(
+        `Días: ${days}`
+      );
+
+      lines.push(
+        `Entrega: ${
+          rentalDelivery.value.trim()
+          || "No especificada"
+        }`
+      );
+
+      if (pricing.type === "fixed") {
+
+        lines.push(
+          `Total: ${money(pricing.total)}`
+        );
+
+      } else {
+
+        lines.push(
+          `Tarifa: ${pricing.text}`
+        );
+      }
+    }
+
+    lines.push(
+      `Nota adicional: ${
+        mensaje || "Ninguna"
+      }`
+    );
+
+    const text =
+      encodeURIComponent(
+        lines.join("\n")
+      );
+
+    window.open(
+      `https://wa.me/${PHONE_NUMBER}?text=${text}`,
+      "_blank"
+    );
   }
+);
 
-  lines.push(`Nota adicional: ${mensaje || "Ninguna"}`);
-
-  const text = encodeURIComponent(lines.join("\n"));
-  window.open(`https://wa.me/${PHONE_NUMBER}?text=${text}`, "_blank");
-});
+/* =========================================
+   INIT
+========================================= */
 
 updateServiceUI();
