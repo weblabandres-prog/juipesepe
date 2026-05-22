@@ -19,7 +19,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
-
+S
 <body>
   <header class="site-header">
     <div class="container header-bar">
@@ -99,7 +99,7 @@
             <button class="service-option active" type="button" data-service="aeropuerto">
               <i class="fa-solid fa-plane-departure"></i>
               <span>
-                <strong>Aeropuerto</strong>
+                <strong>Taxi</strong>
                 <small>Carro, Van XL o XXL</small>
               </span>
             </button>
@@ -117,64 +117,248 @@
           <div class="form-grid">
             <label class="field">
               <span>Servicio</span>
-              <select id="servicio" required>
-                <option value="aeropuerto">Aeropuerto</option>
+              <select id="servicio" required="">
+                <option value="aeropuerto">Taxi</option>
                 <option value="renta">Rent car</option>
               </select>
             </label>
 
             <label class="field">
               <span>Nombre</span>
-              <input type="text" id="nombre" placeholder="Tu nombre" required />
+              <input type="text" id="nombre" placeholder="Tu nombre" required="">
             </label>
 
             <label class="field">
               <span>WhatsApp</span>
-              <input type="tel" id="telefono" placeholder="Tu número" required />
+              <input type="tel" id="telefono" placeholder="Tu número" required="">
             </label>
 
             <label class="field" id="passengerField">
               <span>Pasajeros</span>
-              <input type="number" id="pasajeros" min="1" value="1" required />
+              <input type="number" id="pasajeros" min="1" value="1" required="">
             </label>
 
             <label class="field">
               <span>Fecha</span>
-              <input type="date" id="fecha" required />
+              <input type="date" id="fecha" required="">
             </label>
 
             <label class="field">
               <span>Hora</span>
-              <select id="hora" required>
+              <select id="hora" required="">
                 <option value="">Selecciona una hora</option>
               </select>
             </label>
 
             <label class="field">
               <span>Método de pago</span>
-              <select id="metodoPago" required>
+              <select id="metodoPago" required="">
                 <option value="Efectivo">Efectivo</option>
                 <option value="Transferencia">Transferencia</option>
               </select>
             </label>
           </div>
 
-          <div class="form-grid service-fields" id="airportFields">
-            <label class="field">
-              <span>Aeropuerto / zona</span>
-              <select id="aeropuertoZona" data-required="true">
-                <option value="">Selecciona una opción</option>
-                <option value="punta-cana">Punta Cana</option>
-                <option value="las-terrenas-samana">Las Terrenas, Samaná</option>
-                <option value="santo-domingo">Santo Domingo</option>
-                <option value="santiago">Santiago</option>
-                <option value="puerto-plata">Puerto Plata</option>
-                <option value="la-romana">La Romana</option>
-              </select>
-            </label>
+         <div class="form-grid service-fields" id="airportFields">
+
+  <!-- DESTINO -->
+  <label class="field">
+
+    <!-- ===== CAMPOS TAXI / AEROPUERTO ===== -->
+<div class="form-grid service-fields" id="airportFields">
+
+  <!-- DESTINO -->
+  <label class="field">
+
+    <span>Destino</span>
+
+    <select id="aeropuertoZona" data-required="true">
+
+      <option value="">
+        Selecciona una opción
+      </option>
+
+      <option value="punta-cana">
+        Punta Cana
+      </option>
+
+      <option value="las-terrenas-samana">
+        Las Terrenas, Samaná
+      </option>
+
+      <option value="santo-domingo">
+        Santo Domingo
+      </option>
+
+      <option value="santiago">
+        Santiago
+      </option>
+
+      <option value="puerto-plata">
+        Puerto Plata
+      </option>
+
+      <option value="la-romana">
+        La Romana
+      </option>
+
+      <option value="otro">
+        Otro destino
+      </option>
+
+    </select>
+
+  </label>
+
+  <!-- DESTINO PERSONALIZADO -->
+  <label class="field hidden full" id="otroDestinoField">
+
+    <span>Destino personalizado</span>
+
+    <textarea
+      id="otroDestino"
+      rows="3"
+      placeholder="Escribe aquí hotel, villa, Airbnb, ubicación, parada extra o cualquier detalle..."
+    ></textarea>
+
+  </label>
+
+  <!-- VEHÍCULO -->
+  <label class="field">
+
+    <span>Vehículo para Taxi</span>
+
+    <select id="aeropuertoVehiculo">
+
+      <option value="carro">
+        Carro
+      </option>
+
+      <option value="vanxl">
+        Van XL
+      </option>
+
+      <option value="xxl">
+        XXL (+8 personas)
+      </option>
+
+    </select>
+
+  </label>
+
+  <!-- RECOGIDA -->
+  <label class="field">
+
+    <span>Recogida</span>
+
+    <input
+      type="text"
+      id="airportPickup"
+      placeholder="Hotel, casa o ubicación"
+    >
+
+  </label>
+
+  <!-- NÚMERO DE VUELO -->
+  <label class="field">
+
+    <span>Número de vuelo</span>
+
+    <input
+      type="text"
+      id="flightNumber"
+      placeholder="Ej: AA1234"
+    >
+
+  </label>
+
+</div>
+
+<!-- ===== SCRIPT PARA MOSTRAR / OCULTAR DESTINO PERSONALIZADO ===== -->
+<script>
+
+const aeropuertoZona = document.getElementById("aeropuertoZona");
+
+const otroDestinoField = document.getElementById("otroDestinoField");
+
+aeropuertoZona.addEventListener("change", () => {
+
+  if (aeropuertoZona.value === "otro") {
+
+    otroDestinoField.classList.remove("hidden");
+
+  } else {
+
+    otroDestinoField.classList.add("hidden");
+
+  }
+
+});
+
+</script>
+
+  <!-- VEHICULO -->
+  <label class="field">
+
+    <span>Vehículo para Taxi</span>
+
+    <select id="aeropuertoVehiculo">
+
+      <option value="carro">
+        Carro
+      </option>
+
+      <option value="vanxl">
+        Van XL
+      </option>
+
+      <option value="xxl">
+        XXL (+8 personas)
+      </option>
+
+    </select>
+
+  </label>
+
+  <!-- RECOGIDA -->
+  <label class="field">
+
+    <span>Recogida</span>
+
+    <input type="text" id="airportPickup" placeholder="Hotel, casa o ubicación">
+
+  </label>
+
+  <!-- NUMERO DE VUELO -->
+  <label class="field">
+
+    <span>Número de vuelo</span>
+
+    <input type="text" id="flightNumber" placeholder="Ej: AA1234">
+
+  </label>
+
+</div>
+
+<!-- CAMPO EXTRA COMO NOTA -->
+<label
+  class="field hidden"
+  id="otroDestinoField"
+>
+
+  <span>Agregar destino personalizado</span>
+
+  <textarea
+    id="otroDestino"
+    rows="3"
+    placeholder="Escribe aquí otro destino, parada, hotel, ubicación o nota adicional..."
+  ></textarea>
+
+</label>
+</div>
 
             <label class="field">
-              <span>Vehículo</span>
+              <span>Vehículo para Taxi</span>
               <select id="aeropuertoVehiculo">
                 <option value="carro">Carro</option>
                 <option value="vanxl">Van XL</option>
@@ -182,13 +366,7 @@
               </select>
             </label>
 
-            <label class="field">
-              <span>Traslado</span>
-              <select id="aeropuertoSentido">
-                <option value="Hacia el aeropuerto">Hacia el aeropuerto</option>
-                <option value="Desde el aeropuerto">Desde el aeropuerto</option>
-              </select>
-            </label>
+            
 
             <label class="field">
               <span>Recogida</span>
@@ -200,11 +378,7 @@
               <input type="text" id="flightNumber" placeholder="Ej: AA1234" />
             </label>
 
-            <label class="field full">
-              <span>Destino</span>
-              <input type="text" id="airportDropoff" placeholder="Destino final o punto de llegada" />
-            </label>
-          </div>
+            
 
           <div class="form-grid service-fields hidden" id="rentalFields">
             <label class="field">
@@ -354,7 +528,7 @@
         <div class="rate-grid">
           <article class="rate-summary">
             <i class="fa-solid fa-plane-departure"></i>
-            <strong>Aeropuerto</strong>
+            <strong>Taxi</strong>
             <span>Traslados desde US$35 según zona y tipo de vehículo.</span>
           </article>
 
